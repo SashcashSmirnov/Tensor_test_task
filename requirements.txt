@@ -1,0 +1,5 @@
+allure_python_commons==2.15.3
+pefile==2024.8.26
+pytest==9.0.3
+Requests==2.33.1
+seleniumbase==4.48.2

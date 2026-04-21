@@ -1,0 +1,38 @@
+# .gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Виртуальное окружение
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Тесты и отчёты
+allure_results/
+allure_report/
+.DS_Store
+
+# Логи и скачанные файлы
+*.log
+downloaded_files/*.exe
+downloaded_files/*.dmg
+!downloaded_files/.gitkeep
+
+# pytest
+.pytest_cache/
+.tox/
