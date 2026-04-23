@@ -2,8 +2,10 @@ import pytest
 import allure
 import re
 from seleniumbase import BaseCase
-from utils.checks import assert_images_equal_size, count_number_of_partners_in_region, verify_saby_download
-from utils.locators import SabyPage, TensorPage
+from Pages.saby_page import *
+from Pages.tensor_page import *
+from Locators.Saby import SabyPage
+from Locators.Tensor import TensorPage
 from allure import step as Step
 
 @pytest.mark.smoke
@@ -11,10 +13,10 @@ from allure import step as Step
 @allure.severity(allure.severity_level.NORMAL)
 class TensorUIVerificationTest(BaseCase):
 
-    def test_links_and_ui_sbis_tensor(self):
+    def test_links_and_ui_saby_tensor(self):
         with Step("Шаг 1: Открыть главную Сабу.ру"):
-            self.open(SabyPage.SABY_MAIN_PAGE)
-
+            open_sbis_main_page(self)
+            
         with Step("Шаг 2: Кликнуть на 'Контакты' в хедере"):
             self.hover_and_click(SabyPage.CONTACTS_DROPDOWN_MENU, SabyPage.CONTACTS)
 
@@ -39,20 +41,21 @@ class TensorUIVerificationTest(BaseCase):
 @allure.feature("Case 2. Проверка функциональности на сайте Сабу.ру")
 @allure.severity(allure.severity_level.NORMAL)
 class SabyUIVerificationTest(BaseCase):
+    
     def test_region_change_in_contacts(self):
         
         start_region = {"city": "Екатеринбург", "region": "Свердловская обл."}
         target_region = {"city": "Петропавловск-Камчатский", "region": "Камчатский край"}
 
         with Step("Шаг 1: Открыть главную Сабу.ру"):
-            self.open(SabyPage.SABY_MAIN_PAGE)
+            open_sbis_main_page(self)
 
         with Step("Шаг 2: Кликнуть на 'Контакты' в хедере"):
             self.hover_and_click(SabyPage.CONTACTS_DROPDOWN_MENU, SabyPage.CONTACTS)
 
         with Step("Шаг 3: Проверить, что указана Свердловская область"):
             self.assert_exact_text(start_region["region"], SabyPage.REGION_LOCATION)
-            
+
         with Step("Шаг 4: Проверить, что город Екатеринбург"):
             self.assert_exact_text(start_region["city"], SabyPage.CITY_LOCATION)
 
@@ -89,10 +92,10 @@ class SabyDownloadVerificationVersionTest(BaseCase):
 
     def test_version_number_of_downloaded_setup(self):
         with Step("Шаг 1: Открыть главную Сабу.ру"):
-            self.open(SabyPage.SABY_MAIN_PAGE)
+            open_sbis_main_page(self)
 
         with Step("Шаг 2: В Footer'e найти и перейти 'Скачать локальные версии'"):
             self.click(SabyPage.DOWNLOAD_LOCAL)
 
         with Step("Шаг 3: Скачать ПО Сабу для Windows, в папку с тестом и сравнить версию скачанного файла с версией указанной на сайте"):
-            verify_saby_download(self)
+            verify_saby_downloaded_setup_version(self)
