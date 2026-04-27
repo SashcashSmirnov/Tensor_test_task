@@ -46,7 +46,7 @@ jobs:
             --browser=chrome \
             -v \
             --tb=short \
-            --timeout=300
+            --time-limit=300
 
       - name: Сохранить скриншоты (если тесты упали)
         if: failure()
