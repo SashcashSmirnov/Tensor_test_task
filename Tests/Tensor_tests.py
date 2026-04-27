@@ -26,7 +26,7 @@ class TensorUIVerificationTest(BaseCase):
             self.is_element_visible(TensorPageLocators.SILA_V_LUDIAH_BLOCK)
 
         with Step("Шаг 5: Кликнуть на кнопку 'Подробнее' в блоке 'Сила в людях'"):
-            self.click_if_visible(TensorPageLocators.COOKIES_ALERT_CLOSE_BUTTON, timeout=2)
+            self.click_if_visible(TensorPageLocators.COOKIES_ALERT_CLOSE_BUTTON)
             self.click(TensorPageLocators.SILA_V_LUDIAH_DETAILED_BUTTON)
 
         with Step("Шаг 6: Проверить, что открылась страница 'tensor.ru/about'"):
