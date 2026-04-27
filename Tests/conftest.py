@@ -18,9 +18,13 @@ def pytest_runtest_makereport(item, call):
     report = outcome.get_result()
 
     if report.when == "call" and report.failed:
-        if hasattr(item.instance, 'driver'):
-            allure.attach(
-                item.instance.driver.get_screenshot_as_png(),
-                name="screenshot",
-                attachment_type=allure.attachment_type.PNG
-            )
+        # Проверяем, что driver существует и не None
+        if hasattr(item.instance, 'driver') and item.instance.driver is not None:
+            try:
+                allure.attach(
+                    item.instance.driver.get_screenshot_as_png(),
+                    name="screenshot",
+                    attachment_type=allure.attachment_type.PNG
+                )
+            except Exception:
+                pass  # если скриншот не сделать — пропускаем
