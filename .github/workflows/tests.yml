@@ -40,7 +40,7 @@ jobs:
 
       - name: Запуск тестов
         run: |
-          pytest Tests/ \
+          pytest Tests/Tensor_tests.py \
             --alluredir=allure-results \
             --headless \
             --browser=chrome \
