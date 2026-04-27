@@ -19,15 +19,12 @@ class SabyPage():
                 assert match, f"Версия не найдена в тексте: {text}"
                 return match.group(1)
 
-        def download_file(test_case, file_name="saby-setup.exe"):
-                BASE_DOWNLOAD_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "downloaded_files")
-                file_link = test_case.get_attribute(SabyPageLocators.SABY_SETUP_DOWNLOAD, "href")   
-                os.makedirs(BASE_DOWNLOAD_DIR, exist_ok=True)
-                file_path = os.path.join(BASE_DOWNLOAD_DIR, file_name)
-                response = requests.get(file_link, stream=True)
+        def download_file(self):
+                file_path = "Tests/downloaded_files/saby-setup.exe"
+                file_link = self.test_case.get_attribute(SabyPageLocators.SABY_SETUP_DOWNLOAD, "href")
+                response = requests.get(file_link)
                 with open(file_path, "wb") as f:
-                        for chunk in response.iter_content(chunk_size=8192):
-                                f.write(chunk)
+                        f.write(response.content)
                 return file_path
 
         def check_file_version(file_path, expected_version):
@@ -41,7 +38,7 @@ class SabyPage():
                                                 if b'FileVersion' in st.entries:
                                                         version = st.entries[b'FileVersion'].decode('utf-8')
                                                         version = version.rstrip('.0')
-                                                        return version == expected_version, version
+                                                        return version == expected_version, version                                       
                 return False, "Версия не найдена"
 
         def verify_saby_downloaded_setup_version(self, test_case):

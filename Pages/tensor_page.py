@@ -6,5 +6,3 @@ class TensorPage():
         assert all(s == sizes[0] for s in sizes), f"Размеры: {sizes}"
 
 
-
-

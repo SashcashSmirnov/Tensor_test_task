@@ -1,6 +1,3 @@
-import os
-import sys
-
 import allure
 import pytest
 
@@ -18,7 +15,6 @@ def pytest_runtest_makereport(item, call):
     report = outcome.get_result()
 
     if report.when == "call" and report.failed:
-        # Проверяем, что driver существует и не None
         if hasattr(item.instance, 'driver') and item.instance.driver is not None:
             try:
                 allure.attach(
@@ -27,4 +23,4 @@ def pytest_runtest_makereport(item, call):
                     attachment_type=allure.attachment_type.PNG
                 )
             except Exception:
-                pass  # если скриншот не сделать — пропускаем
+                pass
