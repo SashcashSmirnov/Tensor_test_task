@@ -32,6 +32,8 @@ allure_report/
 downloaded_files/*.exe
 downloaded_files/*.dmg
 !downloaded_files/.gitkeep
+downloaded_files/
+
 
 # pytest
 .pytest_cache/

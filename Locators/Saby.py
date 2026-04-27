@@ -1,6 +1,4 @@
-from seleniumbase import BaseCase
-
-class SabyPage(BaseCase):
+class SabyPageLocators:
     
     CONTACTS = 'a[href="/contacts"]'
     CONTACTS_DROPDOWN_MENU = '.sbisru-MenuPopupTemplate__title.ws-flexbox.ws-align-items-start.pv-8.controls-PopupPreviewer'
